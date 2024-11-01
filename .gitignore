@@ -1,0 +1,4 @@
+/_gclient_*
+/v8
+/.cipd
+/.gclient_*
