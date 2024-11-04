@@ -2,9 +2,14 @@ use_relative_paths = True
 
 gclient_gn_args_file = 'build/config/gclient_args.gni'
 gclient_gn_args = [
+  'build_with_chromium',
 ]
 
 vars = {
+  # Variable that can be used to support multiple build scenarios, like having
+  # Chromium specific targets in a client project's GN file or sync dependencies
+  # conditionally etc.
+  'build_with_chromium': True,
   'chromium_git': 'https://chromium.googlesource.com',
   'v8_revision': 'a341591e99d740319bfb93a9de93593a9ec22ba5',
   'gn_version': 'git_revision:feafd1012a32c05ec6095f69ddc3850afb621f3a',
