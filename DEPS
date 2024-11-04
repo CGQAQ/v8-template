@@ -221,6 +221,9 @@ deps = {
     '@' +
     Var('llvm_libc_revision'),
 
+  'third_party/depot_tools':
+    Var('chromium_git') + '/chromium/tools/depot_tools.git' + '@' + '39b2e4efd608584059aa5bb9af8e65597ca86276',
+
   'v8': Var('chromium_git') + '/v8/v8.git' + '@' + Var('v8_revision'),
 };
 
@@ -229,7 +232,7 @@ hooks = [
     # Update LASTCHANGE.
     'name': 'lastchange',
     'pattern': '.',
-    'action': ['python3', 'src/build/util/lastchange.py',
-               '-o', 'src/build/util/LASTCHANGE'],
+    'action': ['python3', 'build/util/lastchange.py',
+               '-o', 'build/util/LASTCHANGE'],
   },
 ]
