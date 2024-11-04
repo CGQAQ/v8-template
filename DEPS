@@ -196,6 +196,8 @@ deps = {
     'condition': 'host_os == "win"',
   },
 
+  'build': Var('chromium_git') + '/chromium/src/build',
+
   'third_party/libc++/src':
     Var('chromium_git') +
     '/external/github.com/llvm/llvm-project/libcxx.git' +
