@@ -1,0 +1,5 @@
+buildconfig = "//build/config/BUILDCONFIG.gn"
+
+declare_args() {
+  build_with_chromium = false
+}
