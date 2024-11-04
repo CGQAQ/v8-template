@@ -9,7 +9,7 @@ vars = {
   # Variable that can be used to support multiple build scenarios, like having
   # Chromium specific targets in a client project's GN file or sync dependencies
   # conditionally etc.
-  'build_with_chromium': True,
+  'build_with_chromium': False,
   'chromium_git': 'https://chromium.googlesource.com',
   'v8_revision': 'a341591e99d740319bfb93a9de93593a9ec22ba5',
   'gn_version': 'git_revision:feafd1012a32c05ec6095f69ddc3850afb621f3a',
