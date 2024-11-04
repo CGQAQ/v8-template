@@ -1,3 +1,4 @@
-buildtools
-third_party
-v8
+/buildtools
+/third_party
+/v8
+/build
