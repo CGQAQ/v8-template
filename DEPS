@@ -1,5 +1,7 @@
 use_relative_paths = True
 
+gclient_gn_args_file = 'build/config/gclient_args.gni'
+
 vars = {
   'chromium_git': 'https://chromium.googlesource.com',
   'v8_revision': 'a341591e99d740319bfb93a9de93593a9ec22ba5',
@@ -221,3 +223,13 @@ deps = {
 
   'v8': Var('chromium_git') + '/v8/v8.git' + '@' + Var('v8_revision'),
 };
+
+hooks = [
+  {
+    # Update LASTCHANGE.
+    'name': 'lastchange',
+    'pattern': '.',
+    'action': ['python3', 'src/build/util/lastchange.py',
+               '-o', 'src/build/util/LASTCHANGE'],
+  },
+]
