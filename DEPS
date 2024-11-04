@@ -98,7 +98,7 @@ deps = {
   },
   'src/buildtools/win-format': {
     bucket: 'chromium-clang-format',
-    condition: 'host_os == 'win' and non_git_source',
+    condition: 'host_os == "win" and non_git_source',
     dep_type: 'gcs',
     objects: [
       {
@@ -113,7 +113,7 @@ deps = {
   },
   'src/buildtools/mac-format': {
     bucket: 'chromium-clang-format',
-    condition: 'host_os == 'mac' and host_cpu == 'x64' and non_git_source',
+    condition: 'host_os == "mac" and host_cpu == "x64" and non_git_source',
     dep_type: 'gcs',
     objects: [
       {
@@ -128,7 +128,7 @@ deps = {
   },
   'src/buildtools/mac_arm64-format': {
     bucket: 'chromium-clang-format',
-    condition: 'host_os == 'mac' and host_cpu == 'arm64' and non_git_source',
+    condition: 'host_os == "mac" and host_cpu == "arm64" and non_git_source',
     dep_type: 'gcs',
     objects: [
       {
@@ -143,7 +143,7 @@ deps = {
   },
   'src/buildtools/linux64-format': {
     bucket: 'chromium-clang-format',
-    condition: 'host_os == 'linux' and non_git_source',
+    condition: 'host_os == "linux" and non_git_source',
     dep_type: 'gcs',
     objects: [
       {
@@ -175,7 +175,7 @@ deps = {
       },
     ],
     dep_type: 'cipd',
-    condition: 'host_os == 'linux' and non_git_source',
+    condition: 'host_os == "linux" and non_git_source',
   },
   'src/buildtools/mac': {
     packages: [
@@ -185,7 +185,7 @@ deps = {
       },
     ],
     dep_type: 'cipd',
-    condition: 'host_os == 'mac'',
+    condition: '"host_os" == "mac"',
   },
   'src/buildtools/win': {
     packages: [
@@ -195,7 +195,7 @@ deps = {
       },
     ],
     dep_type: 'cipd',
-    condition: 'host_os == 'win'',
+    condition: 'host_os == "win"',
   },
 
   'src/third_party/libc++/src':
@@ -219,5 +219,5 @@ deps = {
     '@' +
     Var('llvm_libc_revision'),
 
-  v8: Var('chromium_git') + '/v8/v8.git' + '@' + Var('v8_revision'),
+  'v8': Var('chromium_git') + '/v8/v8.git' + '@' + Var('v8_revision'),
 };
