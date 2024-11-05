@@ -1,3 +1,4 @@
 executable("helloworld") {
   sources = [ "src/helloworld.cc" ]
+  deps = [ "//v8:v8" ]
 }

@@ -1,7 +1,12 @@
 /buildtools
-/third_party
 /v8
 /build
 /build_overrideso
 /tools
 /out
+
+/third_party
+
+# ignore /third_party/fp16/src, but the /third_party/fp16/BUILD.gn is needed
+!/third_party/fp16/
+/third_party/fp16/src

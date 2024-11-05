@@ -3,6 +3,7 @@ use_relative_paths = True
 gclient_gn_args_file = 'build/config/gclient_args.gni'
 gclient_gn_args = [
   'build_with_chromium',
+  'generate_location_tags',
 ]
 
 vars = {
@@ -17,12 +18,22 @@ vars = {
   'libcxxabi_revision': '191356bd9953e40cf506d069c9e9e13ef7f424b7',
   'libunwind_revision': 'bf062897f1bcc109fd40ba18a71a0977c4c593d1',
   'llvm_libc_revision': '194ae301addaa480cd3a6c9a0efebb67053a7838',
+  'googletest_revision': 'd144031940543e15423a25ae5a8a74141044862f',
+
+
   'non_git_source': 'True',
   'checkout_src_internal': False,
   'llvm_force_head_revision': False,
   'checkout_clang_tidy': False,
   'checkout_clangd': False,
   'checkout_clang_coverage_tools': False,
+
+  # Generate location tag metadata to include in tests result data uploaded
+  # to ResultDB. This isn't needed on some configs and the tool that generates
+  # the data may not run on them, so we make it possible for this to be
+  # turned off. Note that you also generate the metadata but not include it
+  # via a GN build arg (tests_have_location_tags).
+  'generate_location_tags': True,
 };
 
 deps = {
@@ -384,6 +395,36 @@ deps = {
   'third_party/depot_tools':
     Var('chromium_git') + '/chromium/tools/depot_tools.git' + '@' + '39b2e4efd608584059aa5bb9af8e65597ca86276',
 
+  # icu is required by v8
+  'third_party/icu':
+    Var('chromium_git') + '/chromium/deps/icu.git' + '@' + '4239b1559d11d4fa66c100543eda4161e060311e',
+  # abseil-cpp is required by v8
+  'third_party/abseil-cpp': {
+    'url': Var('chromium_git') + '/chromium/src/third_party/abseil-cpp.git' + '@' + '78991980f5e06fae378e8cb5f3228cf8c3bb1df3',
+    'condition': 'not build_with_chromium',
+  },
+  # zlib is required by v8
+  'third_party/zlib':
+    Var('chromium_git') + '/chromium/src/third_party/zlib.git' + '@' + 'c7678ba8af4577e45023b35ae96b6b71efa0acf7',
+  # fp16 is required by v8
+  'third_party/fp16/src':
+    Var('chromium_git') + '/external/github.com/Maratyszcza/FP16.git' + '@' + '0a92994d729ff76a58f692d3028ca1b64b145d91',
+  # fast_float is required by v8
+  'third_party/fast_float/src':
+    Var('chromium_git') + '/external/github.com/fastfloat/fast_float.git' + '@' + '3e57d8dcfb0a04b5a8a26b486b54490a2e9b310f',
+  # //testing is needed for v8
+  'testing': Var('chromium_git') + '/chromium/src/testing' + '@' + '414a8291d5d4af24c61cc8129816dd46e39519ae',
+  # //third_party/googletest is needed for v8
+  'third_party/googletest':
+    Var('chromium_git') + '/chromium/src/third_party/googletest' + '@' + '956ddac3b6e6a182ff4caaa5977e0dbc01eb56ef',
+  'third_party/googletest/src':
+    Var('chromium_git') + '/external/github.com/google/googletest.git' + '@' + Var('googletest_revision'),
+  # //third_party/re2 is needed for v8
+  'third_party/re2':
+    Var('chromium_git') + '/chromium/src/third_party/re2' + '@' + '25ccfe654a55eda2a2340f3cf450fe841404fc62',
+  'third_party/re2/src':
+    Var('chromium_git') + '/external/github.com/google/re2.git' + '@' + '6dcd83d60f7944926bfd308cc13979fc53dd69ca',
+
   'tools': Var('chromium_git') + '/chromium/src/tools' + '@' + 'fb2601b1bcc2012da96a9584af99baee10e0e856',
 
   'v8': Var('chromium_git') + '/v8/v8.git' + '@' + Var('v8_revision'),
@@ -397,4 +438,13 @@ hooks = [
     'action': ['python3', 'build/util/lastchange.py',
                '-o', 'build/util/LASTCHANGE'],
   },
+]
+
+skip_child_includes = [
+  'native_client_sdk',
+  'out',
+  'skia',
+  'testing',
+  'third_party/abseil-cpp',
+  'v8',
 ]

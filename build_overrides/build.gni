@@ -2,6 +2,8 @@ import("//build/config/features.gni")
 import("//build/config/gclient_args.gni")
 
 enable_safe_libcxx = true
+build_with_v8_embedder = build_with_chromium
+v8_enable_test_features = false
 
 declare_args() {
 }
