@@ -2,4 +2,5 @@ import("//build/config/features.gni")
 import("//build/config/gclient_args.gni")
 import("//v8/build_overrides/build.gni")
 
-build_with_v8_embedder = build_with_chromium
+build_with_v8_embedder = true
+# v8_enable_test_features = false

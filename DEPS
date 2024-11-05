@@ -14,7 +14,6 @@ vars = {
   'build_with_chromium': False,
   'chromium_git': 'https://chromium.googlesource.com',
   'v8_revision': 'a341591e99d740319bfb93a9de93593a9ec22ba5',
-  'gn_version': 'git_revision:feafd1012a32c05ec6095f69ddc3850afb621f3a',
   'libcxx_revision': '8e31ad42561900383e10dbefc1d3e8f38cedfbe9',
   'libcxxabi_revision': '191356bd9953e40cf506d069c9e9e13ef7f424b7',
   'libunwind_revision': 'bf062897f1bcc109fd40ba18a71a0977c4c593d1',
@@ -24,7 +23,11 @@ vars = {
   'reclient_package': 'infra/rbe/client/',
   # reclient CIPD package version
   'reclient_version': 're_client_version:0.170.0.08051991-gomaip',
-
+  # GN CIPD package version.
+  'gn_version': 'git_revision:feafd1012a32c05ec6095f69ddc3850afb621f3a',
+  # ninja CIPD package version
+  # https://chrome-infra-packages.appspot.com/p/infra/3pp/tools/ninja
+  'ninja_version': 'version:3@1.12.1.chromium.4',
 
   'non_git_source': 'True',
   'checkout_src_internal': False,
@@ -212,7 +215,7 @@ deps = {
       },
     ],
     'dep_type': 'cipd',
-    'condition': '"host_os" == "mac"',
+    'condition': 'host_os == "mac"',
   },
   'buildtools/win': {
     'packages': [
@@ -278,6 +281,11 @@ deps = {
   # fast_float is required by v8
   'third_party/fast_float/src':
     Var('chromium_git') + '/external/github.com/fastfloat/fast_float.git' + '@' + '3e57d8dcfb0a04b5a8a26b486b54490a2e9b310f',
+  'third_party/jsoncpp':
+    Var('chromium_git') + '/chromium/src/third_party/jsoncpp'
+      + '@' + '40ef0f6bac826ebadc6215480ccf522d31fc7ada', # release 1.9.4
+
+  
   # //testing is needed for v8
   'testing': Var('chromium_git') + '/chromium/src/testing' + '@' + '414a8291d5d4af24c61cc8129816dd46e39519ae',
   # //third_party/googletest is needed for v8
@@ -296,6 +304,16 @@ deps = {
   # //third_party/markupsafe is needed for v8
   'third_party/markupsafe':
     Var('chromium_git') + '/chromium/src/third_party/markupsafe' + '@' + '6638e9b0a79afc2ff7edd9e84b518fe7d5d5fea9',
+  'third_party/ninja': {
+    'packages': [
+      {
+        'package': 'infra/3pp/tools/ninja/${{platform}}',
+        'version': Var('ninja_version'),
+      }
+    ],
+    'dep_type': 'cipd',
+    'condition': 'host_cpu != "s390" and host_os != "zos" and host_cpu != "ppc"'
+  },
 
   'tools': Var('chromium_git') + '/chromium/src/tools' + '@' + 'fb2601b1bcc2012da96a9584af99baee10e0e856',
 
@@ -379,4 +397,5 @@ include_rules = [
 recursedeps = [
   'build',
   'buildtools',
+  'third_party/jsoncpp',
 ]

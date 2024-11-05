@@ -1,7 +1,5 @@
-import("//v8/gni/v8.gni")
-
 executable("helloworld") {
   sources = [ "src/helloworld.cc" ]
-  deps = [ "//v8:v8_libplatform" ]
-  public_deps = [ "//v8:v8" ]
+  deps = [ "//v8:v8" ]
+  # public_deps = [ "//v8:v8" ]
 }

@@ -5,8 +5,12 @@
 /tools
 /out
 
-/third_party
+/third_party/*
 
 # ignore /third_party/fp16/src, but the /third_party/fp16/BUILD.gn is needed
-!/third_party/fp16/
+!/third_party/fp16
 /third_party/fp16/src
+!/third_party/llvm-libc
+/third_party/llvm-libc/src
+!/third_party/fast_float
+/third_party/fast_float/src
