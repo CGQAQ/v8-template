@@ -1,8 +1,11 @@
-# HOW TO
+## What's this?
+`v8-template`  A minimal GN project template that have V8 engine as dependency, with a hello world example
 
-## Get the code
+## HOW TO
 
-DO NOT USE `git clone`!
+### Get the code
+
+***DO NOT USE `git clone`!***
 
 instead, use `gclient` to get the code:
 
