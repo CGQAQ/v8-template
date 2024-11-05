@@ -424,6 +424,12 @@ deps = {
     Var('chromium_git') + '/chromium/src/third_party/re2' + '@' + '25ccfe654a55eda2a2340f3cf450fe841404fc62',
   'third_party/re2/src':
     Var('chromium_git') + '/external/github.com/google/re2.git' + '@' + '6dcd83d60f7944926bfd308cc13979fc53dd69ca',
+  # //third_party/jinja2 is needed for v8
+  'third_party/jinja2':
+    Var('chromium_git') + '/chromium/src/third_party/jinja2' + '@' + '2f6f2ff5e4c1d727377f5e1b9e1903d871f41e74',
+  # //third_party/markupsafe is needed for v8
+  'third_party/markupsafe':
+    Var('chromium_git') + '/chromium/src/third_party/markupsafe' + '@' + '6638e9b0a79afc2ff7edd9e84b518fe7d5d5fea9',
 
   'tools': Var('chromium_git') + '/chromium/src/tools' + '@' + 'fb2601b1bcc2012da96a9584af99baee10e0e856',
 
@@ -447,4 +453,35 @@ skip_child_includes = [
   'testing',
   'third_party/abseil-cpp',
   'v8',
+]
+
+include_rules = [
+  # Abseil is allowed by default, but some features are banned. See
+  # //styleguide/c++/c++-features.md.
+  '+third_party/abseil-cpp',
+  '-third_party/abseil-cpp/absl/algorithm/container.h',
+  '-third_party/abseil-cpp/absl/base/attributes.h',
+  '-third_party/abseil-cpp/absl/base/no_destructor.h',
+  '-third_party/abseil-cpp/absl/base/nullability.h',
+  '-third_party/abseil-cpp/absl/container',
+  '+third_party/abseil-cpp/absl/container/inlined_vector.h',
+  '-third_party/abseil-cpp/absl/crc',
+  '-third_party/abseil-cpp/absl/flags',
+  '-third_party/abseil-cpp/absl/functional/any_invocable.h',
+  '-third_party/abseil-cpp/absl/functional/bind_front.h',
+  '-third_party/abseil-cpp/absl/functional/function_ref.h',
+  '-third_party/abseil-cpp/absl/functional/overload.h',
+  '-third_party/abseil-cpp/absl/hash',
+  '-third_party/abseil-cpp/absl/log',
+  '-third_party/abseil-cpp/absl/random',
+  '-third_party/abseil-cpp/absl/status/statusor.h',
+  '-third_party/abseil-cpp/absl/strings',
+  '+third_party/abseil-cpp/absl/strings/ascii.h',
+  '+third_party/abseil-cpp/absl/strings/cord.h',
+  '+third_party/abseil-cpp/absl/strings/str_format.h',
+  '-third_party/abseil-cpp/absl/synchronization',
+  '-third_party/abseil-cpp/absl/time',
+  '-third_party/abseil-cpp/absl/types/any.h',
+  '-third_party/abseil-cpp/absl/types/optional.h',
+  '-third_party/abseil-cpp/absl/types/span.h',
 ]
