@@ -3,6 +3,10 @@ import("//build/dotfile_settings.gni")
 buildconfig = "//build/config/BUILDCONFIG.gn"
 script_executable = "python3"
 
+export_compile_commands = [
+  ":helloworld",
+]
+
 declare_args() {
   v8_enable_test_features = false
   v8_enable_fuzztest = false

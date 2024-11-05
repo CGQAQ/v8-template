@@ -1,0 +1,7 @@
+{
+    "clangd.arguments": [
+        "-j=8",
+        "--background-index",
+        "--compile-commands-dir=${workspaceFolder}/out/v8"
+    ]
+}
