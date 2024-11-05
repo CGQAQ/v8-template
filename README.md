@@ -9,7 +9,7 @@
 
 instead, use `gclient` to get the code:
 
-```
+```bash
 gclient config --unmanaged https://github.com/CGQAQ/v8-template.git
 # or if you have ssh access
 gclient config --unmanaged git@github.com:CGQAQ/v8-template.git
