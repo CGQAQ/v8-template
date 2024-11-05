@@ -1,0 +1,7 @@
+import("//build/config/features.gni")
+import("//build/config/gclient_args.gni")
+
+enable_safe_libcxx = true
+
+declare_args() {
+}

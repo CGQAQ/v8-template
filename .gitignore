@@ -2,5 +2,6 @@
 /third_party
 /v8
 /build
-/build_overrides
+/build_overrideso
+/tools
 /out
