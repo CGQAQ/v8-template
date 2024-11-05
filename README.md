@@ -15,4 +15,7 @@ gclient config --unmanaged https://github.com/CGQAQ/v8-template.git
 gclient config --unmanaged git@github.com:CGQAQ/v8-template.git
 gclient sync
 cd v8-template
+gn gen out/v8
+autoninja -C out/v8 helloworld
+./out/v8/helloworld
 ```
