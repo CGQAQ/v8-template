@@ -297,70 +297,39 @@ deps = {
   },
 
   'build': Var('chromium_git') + '/chromium/src/build',
-
-  'third_party/libc++/src':
-    Var('chromium_git') +
-    Var('libcxx_path') +
-    '@' +
-    Var('libcxx_revision'),
-  'third_party/libc++abi/src':
-    Var('chromium_git') +
-    Var('libcxxabi_path') +
-    '@' +
-    Var('libcxxabi_revision'),
-  'third_party/libunwind/src':
-    Var('chromium_git') +
-    Var('libunwind_path') +
-    '@' +
-    Var('libunwind_revision'),
-  'third_party/llvm-libc/src':
-    Var('chromium_git') +
-    Var('llvm_libc_path') +
-    '@' +
-    Var('llvm_libc_revision'),
-
-  'third_party/depot_tools':
-    Var('chromium_git') + Var('depot_tools_path') + '@' + Var('depot_tools_version'),
-
+  'third_party/libc++/src': Var('chromium_git') + Var('libcxx_path') + '@' + Var('libcxx_revision'),
+  'third_party/libc++abi/src': Var('chromium_git') + Var('libcxxabi_path') + '@' + Var('libcxxabi_revision'),
+  'third_party/libunwind/src': Var('chromium_git') + Var('libunwind_path') + '@' + Var('libunwind_revision'),
+  'third_party/llvm-libc/src': Var('chromium_git') + Var('llvm_libc_path') + '@' + Var('llvm_libc_revision'),
+  'third_party/depot_tools': Var('chromium_git') + Var('depot_tools_path') + '@' + Var('depot_tools_version'),
   # icu is required by v8
-  'third_party/icu':
-    Var('chromium_git') + '/chromium/deps/icu.git' + '@' + Var('icu_revision'),
+  'third_party/icu': Var('chromium_git') + Var('icu_path') + '@' + Var('icu_revision'),
   # abseil-cpp is required by v8
   'third_party/abseil-cpp': {
-    'url': Var('chromium_git') + '/chromium/src/third_party/abseil-cpp.git' + '@' + Var('abseil_revision'),
+    'url': Var('chromium_git') + Var('abseil_path') + '@' + Var('abseil_revision'),
     'condition': 'not build_with_chromium',
   },
   # zlib is required by v8
-  'third_party/zlib':
-    Var('chromium_git') + '/chromium/src/third_party/zlib.git' + '@' + Var('zlib_revision'),
+  'third_party/zlib': Var('chromium_git') + Var('zlib_path') + '@' + Var('zlib_revision'),
   # fp16 is required by v8
-  'third_party/fp16/src':
-    Var('chromium_git') + Var('fp16_path') + '@' + Var('fp16_revision'),
+  'third_party/fp16/src': Var('chromium_git') + Var('fp16_path') + '@' + Var('fp16_revision'),
   # fast_float is required by v8
-  'third_party/fast_float/src':
-    Var('chromium_git') + Var('fast_float_path') + '@' + Var('fast_float_revision'),
-  'third_party/jsoncpp':
-    Var('chromium_git') + Var('jsoncpp_root_path')
-      + '@' + Var('jsoncpp_root_revision'), # release 1.9.4
+  'third_party/fast_float/src': Var('chromium_git') + Var('fast_float_path') + '@' + Var('fast_float_revision'),
+  # jsoncpp is required by v8
+  'third_party/jsoncpp': Var('chromium_git') + Var('jsoncpp_root_path') + '@' + Var('jsoncpp_root_revision'), # release 1.9.4
   
   # //testing is needed for v8
   'testing': Var('chromium_git') + Var('testing_path') + '@' + Var('testing_revision'),
   # //third_party/googletest is needed for v8
-  'third_party/googletest':
-    Var('chromium_git') + Var('googletest_path') + '@' + Var('googletest_revision'),
-  'third_party/googletest/src':
-    Var('chromium_git') + Var('googletest_src_path') + '@' + Var('googletest_src_revision'),
+  'third_party/googletest': Var('chromium_git') + Var('googletest_path') + '@' + Var('googletest_revision'),
+  'third_party/googletest/src': Var('chromium_git') + Var('googletest_src_path') + '@' + Var('googletest_src_revision'),
   # //third_party/re2 is needed for v8
-  'third_party/re2':
-    Var('chromium_git') + Var('re2_path') + '@' + Var('re2_revision'),
-  'third_party/re2/src':
-    Var('chromium_git') + Var('re2_src_path') + '@' + Var('re2_src_revision'),
+  'third_party/re2': Var('chromium_git') + Var('re2_path') + '@' + Var('re2_revision'),
+  'third_party/re2/src': Var('chromium_git') + Var('re2_src_path') + '@' + Var('re2_src_revision'),
   # //third_party/jinja2 is needed for v8
-  'third_party/jinja2':
-    Var('chromium_git') + Var('jinja2_path') + '@' + Var('jinja2_revision'),
+  'third_party/jinja2': Var('chromium_git') + Var('jinja2_path') + '@' + Var('jinja2_revision'),
   # //third_party/markupsafe is needed for v8
-  'third_party/markupsafe':
-    Var('chromium_git') + Var('markupsafe_path') + '@' + Var('markupsafe_revision'),
+  'third_party/markupsafe': Var('chromium_git') + Var('markupsafe_path') + '@' + Var('markupsafe_revision'),
   'third_party/ninja': {
     'packages': [
       {
@@ -371,9 +340,7 @@ deps = {
     'dep_type': 'cipd',
     'condition': 'host_cpu != "s390" and host_os != "zos" and host_cpu != "ppc"'
   },
-
   'tools': Var('chromium_git') + Var('tools_path') + '@' + Var('tools_revision'),
-
   'v8': Var('chromium_git') + Var('v8_path') + '@' + Var('v8_revision'),
 };
 
