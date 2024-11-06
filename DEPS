@@ -12,13 +12,25 @@ vars = {
   # Chromium specific targets in a client project's GN file or sync dependencies
   # conditionally etc.
   'build_with_chromium': False,
+  
+  # deps revisions
   'chromium_git': 'https://chromium.googlesource.com',
+
+  'v8_path': '/v8/v8',
   'v8_revision': 'a341591e99d740319bfb93a9de93593a9ec22ba5',
+
+  'libcxx_path': '/external/github.com/llvm/llvm-project/libcxx.git',
   'libcxx_revision': '8e31ad42561900383e10dbefc1d3e8f38cedfbe9',
+
+  'libcxxabi_path': '/external/github.com/llvm/llvm-project/libcxxabi.git',
   'libcxxabi_revision': '191356bd9953e40cf506d069c9e9e13ef7f424b7',
+
+  'libunwind_path': '/external/github.com/llvm/llvm-project/libunwind.git',
   'libunwind_revision': 'bf062897f1bcc109fd40ba18a71a0977c4c593d1',
+
+  'llvm_libc_path': '/external/github.com/llvm/llvm-project/libc.git',
   'llvm_libc_revision': '194ae301addaa480cd3a6c9a0efebb67053a7838',
-  'googletest_revision': 'd144031940543e15423a25ae5a8a74141044862f',
+  
   # reclient CIPD package
   'reclient_package': 'infra/rbe/client/',
   # reclient CIPD package version
@@ -28,6 +40,52 @@ vars = {
   # ninja CIPD package version
   # https://chrome-infra-packages.appspot.com/p/infra/3pp/tools/ninja
   'ninja_version': 'version:3@1.12.1.chromium.4',
+
+  'buildtools_path': '/chromium/src/buildtools.git',
+  'buildtools_version': 'c61bf9c942c84d2c42d4ce4fd5cf751fa36c7fd7',
+
+  'depot_tools_path': '/chromium/tools/depot_tools.git',
+  'depot_tools_version': '39b2e4efd608584059aa5bb9af8e65597ca86276',
+
+  'icu_path': '/chromium/deps/icu.git',
+  'icu_revision': '4239b1559d11d4fa66c100543eda4161e060311e',
+
+  'abseil_path': '/chromium/src/third_party/abseil-cpp.git',
+  'abseil_revision': '78991980f5e06fae378e8cb5f3228cf8c3bb1df3',
+
+  'zlib_path': '/chromium/src/third_party/zlib.git',
+  'zlib_revision': 'c7678ba8af4577e45023b35ae96b6b71efa0acf7',
+
+  'fp16_path': '/external/github.com/Maratyszcza/FP16.git',
+  'fp16_revision': '0a92994d729ff76a58f692d3028ca1b64b145d91',
+
+  'fast_float_path': '/external/github.com/fastfloat/fast_float.git',
+  'fast_float_revision': '3e57d8dcfb0a04b5a8a26b486b54490a2e9b310f',
+
+  'jsoncpp_root_path': '/chromium/src/third_party/jsoncpp',
+  'jsoncpp_root_revision': '40ef0f6bac826ebadc6215480ccf522d31fc7ada',
+
+  'testing_path': '/chromium/src/testing',
+  'testing_revision': '414a8291d5d4af24c61cc8129816dd46e39519ae',
+
+  'googletest_path': '/chromium/src/third_party/googletest',
+  'googletest_revision': '956ddac3b6e6a182ff4caaa5977e0dbc01eb56ef',
+  'googletest_src_path': '/external/github.com/google/googletest.git',
+  'googletest_src_revision': 'd144031940543e15423a25ae5a8a74141044862f',
+
+  're2_path': '/chromium/src/third_party/re2',
+  're2_revision': '25ccfe654a55eda2a2340f3cf450fe841404fc62',
+  're2_src_path': '/external/github.com/google/re2.git',
+  're2_src_revision': '6dcd83d60f7944926bfd308cc13979fc53dd69ca',
+
+  'jinja2_path': '/chromium/src/third_party/jinja2',
+  'jinja2_revision': '2f6f2ff5e4c1d727377f5e1b9e1903d871f41e74',
+
+  'markupsafe_path': '/chromium/src/third_party/markupsafe',
+  'markupsafe_revision': '6638e9b0a79afc2ff7edd9e84b518fe7d5d5fea9',
+
+  'tools_path': '/chromium/src/tools',
+  'tools_revision': 'fb2601b1bcc2012da96a9584af99baee10e0e856',
 
   'non_git_source': 'True',
   'checkout_src_internal': False,
@@ -196,7 +254,7 @@ deps = {
   },
 
   'buildtools':
-    Var('chromium_git') + '/chromium/src/buildtools.git' + '@' + 'c61bf9c942c84d2c42d4ce4fd5cf751fa36c7fd7',
+    Var('chromium_git') + '/chromium/src/buildtools.git' + '@' + Var('buildtools_version'),
   'buildtools/linux64': {
     'packages': [
       {
@@ -242,68 +300,67 @@ deps = {
 
   'third_party/libc++/src':
     Var('chromium_git') +
-    '/external/github.com/llvm/llvm-project/libcxx.git' +
+    Var('libcxx_path') +
     '@' +
     Var('libcxx_revision'),
   'third_party/libc++abi/src':
     Var('chromium_git') +
-    '/external/github.com/llvm/llvm-project/libcxxabi.git' +
+    Var('libcxxabi_path') +
     '@' +
     Var('libcxxabi_revision'),
   'third_party/libunwind/src':
     Var('chromium_git') +
-    '/external/github.com/llvm/llvm-project/libunwind.git' +
+    Var('libunwind_path') +
     '@' +
     Var('libunwind_revision'),
   'third_party/llvm-libc/src':
     Var('chromium_git') +
-    '/external/github.com/llvm/llvm-project/libc.git' +
+    Var('llvm_libc_path') +
     '@' +
     Var('llvm_libc_revision'),
 
   'third_party/depot_tools':
-    Var('chromium_git') + '/chromium/tools/depot_tools.git' + '@' + '39b2e4efd608584059aa5bb9af8e65597ca86276',
+    Var('chromium_git') + Var('depot_tools_path') + '@' + Var('depot_tools_version'),
 
   # icu is required by v8
   'third_party/icu':
-    Var('chromium_git') + '/chromium/deps/icu.git' + '@' + '4239b1559d11d4fa66c100543eda4161e060311e',
+    Var('chromium_git') + '/chromium/deps/icu.git' + '@' + Var('icu_revision'),
   # abseil-cpp is required by v8
   'third_party/abseil-cpp': {
-    'url': Var('chromium_git') + '/chromium/src/third_party/abseil-cpp.git' + '@' + '78991980f5e06fae378e8cb5f3228cf8c3bb1df3',
+    'url': Var('chromium_git') + '/chromium/src/third_party/abseil-cpp.git' + '@' + Var('abseil_revision'),
     'condition': 'not build_with_chromium',
   },
   # zlib is required by v8
   'third_party/zlib':
-    Var('chromium_git') + '/chromium/src/third_party/zlib.git' + '@' + 'c7678ba8af4577e45023b35ae96b6b71efa0acf7',
+    Var('chromium_git') + '/chromium/src/third_party/zlib.git' + '@' + Var('zlib_revision'),
   # fp16 is required by v8
   'third_party/fp16/src':
-    Var('chromium_git') + '/external/github.com/Maratyszcza/FP16.git' + '@' + '0a92994d729ff76a58f692d3028ca1b64b145d91',
+    Var('chromium_git') + Var('fp16_path') + '@' + Var('fp16_revision'),
   # fast_float is required by v8
   'third_party/fast_float/src':
-    Var('chromium_git') + '/external/github.com/fastfloat/fast_float.git' + '@' + '3e57d8dcfb0a04b5a8a26b486b54490a2e9b310f',
+    Var('chromium_git') + Var('fast_float_path') + '@' + Var('fast_float_revision'),
   'third_party/jsoncpp':
-    Var('chromium_git') + '/chromium/src/third_party/jsoncpp'
-      + '@' + '40ef0f6bac826ebadc6215480ccf522d31fc7ada', # release 1.9.4
-
+    Var('chromium_git') + Var('jsoncpp_root_path')
+      + '@' + Var('jsoncpp_root_revision'), # release 1.9.4
   
   # //testing is needed for v8
-  'testing': Var('chromium_git') + '/chromium/src/testing' + '@' + '414a8291d5d4af24c61cc8129816dd46e39519ae',
+  'testing': Var('chromium_git') + Var('testing_path') + '@' + Var('testing_revision'),
   # //third_party/googletest is needed for v8
   'third_party/googletest':
-    Var('chromium_git') + '/chromium/src/third_party/googletest' + '@' + '956ddac3b6e6a182ff4caaa5977e0dbc01eb56ef',
+    Var('chromium_git') + Var('googletest_path') + '@' + Var('googletest_revision'),
   'third_party/googletest/src':
-    Var('chromium_git') + '/external/github.com/google/googletest.git' + '@' + Var('googletest_revision'),
+    Var('chromium_git') + Var('googletest_src_path') + '@' + Var('googletest_src_revision'),
   # //third_party/re2 is needed for v8
   'third_party/re2':
-    Var('chromium_git') + '/chromium/src/third_party/re2' + '@' + '25ccfe654a55eda2a2340f3cf450fe841404fc62',
+    Var('chromium_git') + Var('re2_path') + '@' + Var('re2_revision'),
   'third_party/re2/src':
-    Var('chromium_git') + '/external/github.com/google/re2.git' + '@' + '6dcd83d60f7944926bfd308cc13979fc53dd69ca',
+    Var('chromium_git') + Var('re2_src_path') + '@' + Var('re2_src_revision'),
   # //third_party/jinja2 is needed for v8
   'third_party/jinja2':
-    Var('chromium_git') + '/chromium/src/third_party/jinja2' + '@' + '2f6f2ff5e4c1d727377f5e1b9e1903d871f41e74',
+    Var('chromium_git') + Var('jinja2_path') + '@' + Var('jinja2_revision'),
   # //third_party/markupsafe is needed for v8
   'third_party/markupsafe':
-    Var('chromium_git') + '/chromium/src/third_party/markupsafe' + '@' + '6638e9b0a79afc2ff7edd9e84b518fe7d5d5fea9',
+    Var('chromium_git') + Var('markupsafe_path') + '@' + Var('markupsafe_revision'),
   'third_party/ninja': {
     'packages': [
       {
@@ -315,9 +372,9 @@ deps = {
     'condition': 'host_cpu != "s390" and host_os != "zos" and host_cpu != "ppc"'
   },
 
-  'tools': Var('chromium_git') + '/chromium/src/tools' + '@' + 'fb2601b1bcc2012da96a9584af99baee10e0e856',
+  'tools': Var('chromium_git') + Var('tools_path') + '@' + Var('tools_revision'),
 
-  'v8': Var('chromium_git') + '/v8/v8.git' + '@' + Var('v8_revision'),
+  'v8': Var('chromium_git') + Var('v8_path') + '@' + Var('v8_revision'),
 };
 
 hooks = [
