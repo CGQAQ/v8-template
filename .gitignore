@@ -1,3 +1,5 @@
+/_gclient_*
+
 /buildtools
 /v8
 /build
