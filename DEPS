@@ -296,7 +296,7 @@ deps = {
     'dep_type': 'cipd',
   },
 
-  'build': Var('chromium_git') + '/chromium/src/build',
+  'build': Var('chromium_git') + '/chromium/src/build' + '@' + '43a2115b4e2ecabfc002919263b35e535e05a9dc',
   'third_party/libc++/src': Var('chromium_git') + Var('libcxx_path') + '@' + Var('libcxx_revision'),
   'third_party/libc++abi/src': Var('chromium_git') + Var('libcxxabi_path') + '@' + Var('libcxxabi_revision'),
   'third_party/libunwind/src': Var('chromium_git') + Var('libunwind_path') + '@' + Var('libunwind_revision'),
@@ -371,8 +371,8 @@ hooks = [
     'name': 'sysroot_x64',
     'pattern': '.',
     'condition': 'checkout_linux and checkout_x64',
-    'action': ['python',
-               'v8-gn-example/build/linux/sysroot_scripts/install-sysroot.py',
+    'action': ['python3',
+               'build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=x64'],
   },
 ]
